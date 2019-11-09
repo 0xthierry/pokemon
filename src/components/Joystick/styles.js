@@ -12,24 +12,34 @@ export const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
+
 export const Line = styled.div`
 	height: 22px;
-	width: 100%;
 	background-color: #262626;
 	border-radius: 5px;
 
 	display: grid;
 	grid-auto-flow: column;
 
-	${({ rotate }) =>
-		rotate
+	${({ vertical }) =>
+		vertical
 			? css`
+					width: 100%;
 					transform: rotate(90deg);
 			  `
 			: css`
+					width: 80%;
 					position: absolute;
 			  `}
-`;
-export const Button = styled.div`
-	position: relative;
+
+	button {
+		background-color: #262626;
+		border: none;
+		border-radius: 5px;
+	}
+
+	span {
+		background-color: #2f2f2f;
+		border-radius: 50%;
+	}
 `;

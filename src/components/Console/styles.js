@@ -6,8 +6,8 @@ export const Container = styled.div`
 	border-bottom-right-radius: 40px;
 	border: 4px solid #546285;
 	position: relative;
-
-	max-height: 500px;
+	min-height: 420px;
+	max-height: 450px;
 `;
 
 export const Wrapper = styled.div`
@@ -22,4 +22,28 @@ export const ScreenContainer = styled.div``;
 export const ButtonsContainer = styled.div`
 	margin: 20% 0;
 	align-self: flex-start;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 `;
+
+export const SoundOutputContainer = styled.div`
+	display: flex;
+	align-self: flex-end;
+
+	transform: rotate(-45deg);
+
+	div + div {
+		margin-left: 8px;
+	}
+
+	div {
+		width: 5px;
+		border-radius: 2px;
+		height: 40px;
+		background-color: #566a85;
+	}
+`;
+export const SoundOutput = styled.div``;

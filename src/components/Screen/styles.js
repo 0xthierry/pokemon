@@ -17,11 +17,12 @@ export const Container = styled.div`
 	> p {
 		width: 5px;
 		height: 5px;
-		background: #f00;
 		border-radius: 50%;
 		position: absolute;
 		top: 42px;
 		left: 11px;
+
+		background: ${({ isOn }) => (isOn ? '#f00' : '#a84a32')};
 	}
 
 	> div {

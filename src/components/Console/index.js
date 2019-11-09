@@ -5,30 +5,36 @@ import {
 	Wrapper,
 	ScreenContainer,
 	ButtonsContainer,
+	SoundOutputContainer,
 } from './styles';
 
-export default function Console({ Screen, Joystick }) {
+export default function Console({ Screen, Joystick, Buttons }) {
 	return (
 		<Container>
 			<Wrapper>
-				<ScreenContainer>
-					<Screen />
-				</ScreenContainer>
+				<ScreenContainer>{Screen}</ScreenContainer>
 				<ButtonsContainer>
-					<Joystick />
-					{/* TO.DO add startSelect */}
+					{Joystick}
+					{Buttons}
 				</ButtonsContainer>
+				<SoundOutputContainer>
+					{[...Array(6).keys()].map(i => (
+						<div key={i} />
+					))}
+				</SoundOutputContainer>
 			</Wrapper>
 		</Container>
 	);
 }
 
 Console.defaultProps = {
-	Screen: null,
-	Joystick: null,
+	Screen: <></>,
+	Joystick: <></>,
+	Buttons: <></>,
 };
 
 Console.propTypes = {
 	Screen: PropTypes.element,
 	Joystick: PropTypes.element,
+	Buttons: PropTypes.element,
 };
