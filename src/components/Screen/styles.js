@@ -30,5 +30,29 @@ export const Container = styled.div`
 		height: 100px;
 		background: #61c36c;
 		border: 1px solid #d2d5da;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			width: 6px !important;
+			height: 6px !important;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(0, 0, 0, 0.2);
+			border-radius: 3px;
+		}
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
 	}
+`;
+
+export const ListItem = styled.li`
+	height: 20px;
+	background-color: ${({ isSelected }) => (isSelected ? '#c4c2c2' : '#ededed')};
+	line-height: 20px;
+	cursor: pointer;
+
+	font-weight: 600;
+	text-transform: capitalize;
+	padding: 0 5px;
 `;
