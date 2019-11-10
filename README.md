@@ -1,5 +1,10 @@
 # Pokemon
 
+
+<a href="https://codeclimate.com/github/thierrysantoos1/pokemon/maintainability"><img src="https://api.codeclimate.com/v1/badges/f58aaa1eb5bb02bb147d/maintainability" /></a>
+
+<img src="https://travis-ci.com/thierrysantoos1/pokemon.svg?branch=master" alt="badge"/>
+
 ## Description
 
 This project is a react app for visualize pokemon based on the [PokéAPI](https://pokeapi.co/) 
