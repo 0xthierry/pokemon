@@ -39,11 +39,13 @@ export default function Screen({
 					{page}/{totalPages}
 				</span>
 				<ul>
-					{listPokemon.map(({ name }, i) => (
-						<ListItem key={i} isSelected={i === selectedIndex} ref={refs[i]}>
-							{name}
-						</ListItem>
-					))}
+					{listPokemon.map(({ name }, i) => {
+						return (
+							<ListItem key={i} isSelected={i === selectedIndex} ref={refs[i]}>
+								{name}
+							</ListItem>
+						);
+					})}
 				</ul>
 			</>
 		);
