@@ -1,4 +1,7 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
+import { throttle } from 'underscore';
 import { Default as DefaultLayout } from '../../components/_layouts';
 import Console from '../../components/Console';
 import Screen from '../../components/Screen';
@@ -14,6 +17,7 @@ export default function Home() {
 	const [pokemon, setPokemon] = useState(null);
 	const [offSet, setOffset] = useState(0);
 	const [count, setCount] = useState(0);
+	const _handleNextBackPage = throttle(handleNextBackPage, 300);
 
 	function handleJoystickyUpDown(value) {
 		const lengthPokemon = pokemons.length;
@@ -27,7 +31,7 @@ export default function Home() {
 	}
 
 	async function handleOnSelectPokemon() {
-		const response = await api.get(`/pokemon/${selectedIndex + 1}`);
+		const response = await api.get(`/pokemon/${selectedIndex + 1 + offSet}`);
 		const { data } = response;
 		const { id, name, weight, height } = data;
 		setPokemon({ id, name, weight, height });
@@ -78,8 +82,8 @@ export default function Home() {
 					<Joystick
 						onClickDown={() => handleJoystickyUpDown(1)}
 						onClickUp={() => handleJoystickyUpDown(-1)}
-						onClickNext={() => handleNextBackPage(OFF_SET)}
-						onClickBack={() => handleNextBackPage(-OFF_SET)}
+						onClickNext={() => _handleNextBackPage(OFF_SET)}
+						onClickBack={() => _handleNextBackPage(-OFF_SET)}
 					/>
 				}
 				Buttons={
