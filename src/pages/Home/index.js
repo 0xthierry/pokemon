@@ -6,19 +6,14 @@ import Joystick from '../../components/Joystick';
 import Buttons from '../../components/Buttons';
 import api from '../../service/api';
 
+const OFF_SET = 20;
+
 export default function Home() {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [pokemons, setPokemons] = useState([]);
 	const [pokemon, setPokemon] = useState(null);
-
-	useEffect(() => {
-		async function getAllPokemons() {
-			const response = await api.get('/pokemon');
-			const { data } = response;
-			setPokemons(data.results);
-		}
-		getAllPokemons();
-	}, []);
+	const [offSet, setOffset] = useState(0);
+	const [count, setCount] = useState(0);
 
 	function handleJoystickyUpDown(value) {
 		const lengthPokemon = pokemons.length;
@@ -41,6 +36,32 @@ export default function Home() {
 	async function handleOnBackToList() {
 		setPokemon(null);
 	}
+
+	function handleNextBackPage(value) {
+		const acc = offSet + value;
+		if (value > 0 && acc <= count) {
+			setOffset(acc);
+		}
+		if (value < 0 && acc >= 0) {
+			setOffset(acc);
+		}
+	}
+
+	useEffect(() => {
+		async function getAllPokemons() {
+			const response = await api.get('/pokemon', {
+				params: {
+					limit: 20,
+					offset: offSet,
+				},
+			});
+			const { data } = response;
+			setPokemons(data.results);
+			setCount(data.count);
+		}
+		getAllPokemons();
+	}, [offSet]);
+
 	return (
 		<DefaultLayout>
 			<Console
@@ -49,12 +70,16 @@ export default function Home() {
 						listPokemon={pokemons}
 						selectedIndex={selectedIndex}
 						pokemon={pokemon}
+						totalPages={Math.round(count / OFF_SET)}
+						page={Math.round(offSet / OFF_SET)}
 					/>
 				}
 				Joystick={
 					<Joystick
 						onClickDown={() => handleJoystickyUpDown(1)}
 						onClickUp={() => handleJoystickyUpDown(-1)}
+						onClickNext={() => handleNextBackPage(OFF_SET)}
+						onClickBack={() => handleNextBackPage(-OFF_SET)}
 					/>
 				}
 				Buttons={

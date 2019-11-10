@@ -43,6 +43,15 @@ export const Container = styled.div`
 		&::-webkit-scrollbar-track {
 			background: #f1f1f1;
 		}
+
+		> span {
+			position: absolute;
+			top: 10px;
+			right: 25px;
+			text-align: right;
+			font-size: 11px;
+			font-weight: 700;
+		}
 	}
 `;
 
