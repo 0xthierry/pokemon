@@ -56,3 +56,17 @@ export const ListItem = styled.li`
 	text-transform: capitalize;
 	padding: 0 5px;
 `;
+
+export const ContainerDetail = styled.div`
+	background-color: #ededed;
+	width: 100%;
+	height: 100%;
+
+	padding: 5px;
+
+	div {
+		text-transform: capitalize;
+		height: 20px;
+		line-height: 20px;
+	}
+`;
