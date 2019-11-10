@@ -3,7 +3,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, ListItem, ContainerDetail } from './styles';
 
-export default function Screen({ listPokemon, selectedIndex, pokemon }) {
+export default function Screen({
+	listPokemon,
+	selectedIndex,
+	pokemon,
+	totalPages,
+	page,
+}) {
 	const [isOn, setIsOn] = useState(false);
 
 	const refs = listPokemon.reduce((acc, value, index) => {
@@ -28,13 +34,18 @@ export default function Screen({ listPokemon, selectedIndex, pokemon }) {
 
 	function listPokemons() {
 		return (
-			<ul>
-				{listPokemon.map(({ name }, i) => (
-					<ListItem key={i} isSelected={i === selectedIndex} ref={refs[i]}>
-						{name}
-					</ListItem>
-				))}
-			</ul>
+			<>
+				<span>
+					{page}/{totalPages}
+				</span>
+				<ul>
+					{listPokemon.map(({ name }, i) => (
+						<ListItem key={i} isSelected={i === selectedIndex} ref={refs[i]}>
+							{name}
+						</ListItem>
+					))}
+				</ul>
+			</>
 		);
 	}
 
@@ -42,7 +53,7 @@ export default function Screen({ listPokemon, selectedIndex, pokemon }) {
 		return (
 			<ContainerDetail>
 				{Object.keys(pokemon).map(key => (
-					<div>
+					<div key={key}>
 						<strong>{key}:</strong> {pokemon[key]}
 					</div>
 				))}
@@ -62,6 +73,8 @@ Screen.defaultProps = {
 	listPokemon: [],
 	selectedIndex: 0,
 	pokemon: null,
+	totalPages: 0,
+	page: 0,
 };
 
 Screen.propTypes = {
@@ -78,4 +91,6 @@ Screen.propTypes = {
 		weight: PropTypes.number,
 		height: PropTypes.number,
 	}),
+	totalPages: PropTypes.number,
+	page: PropTypes.number,
 };
