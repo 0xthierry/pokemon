@@ -9,6 +9,7 @@ import api from '../../service/api';
 export default function Home() {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [pokemons, setPokemons] = useState([]);
+	const [pokemon, setPokemon] = useState(null);
 
 	useEffect(() => {
 		async function getAllPokemons() {
@@ -30,17 +31,38 @@ export default function Home() {
 		}
 	}
 
+	async function handleOnSelectPokemon() {
+		const response = await api.get(`/pokemon/${selectedIndex + 1}`);
+		const { data } = response;
+		const { id, name, weight, height } = data;
+		setPokemon({ id, name, weight, height });
+	}
+
+	async function handleOnBackToList() {
+		setPokemon(null);
+	}
 	return (
 		<DefaultLayout>
 			<Console
-				Screen={<Screen listPokemon={pokemons} selectedIndex={selectedIndex} />}
+				Screen={
+					<Screen
+						listPokemon={pokemons}
+						selectedIndex={selectedIndex}
+						pokemon={pokemon}
+					/>
+				}
 				Joystick={
 					<Joystick
 						onClickDown={() => handleJoystickyUpDown(1)}
 						onClickUp={() => handleJoystickyUpDown(-1)}
 					/>
 				}
-				Buttons={<Buttons />}
+				Buttons={
+					<Buttons
+						onClickSelectPokemon={handleOnSelectPokemon}
+						onClickBackToList={handleOnBackToList}
+					/>
+				}
 			/>
 		</DefaultLayout>
 	);
