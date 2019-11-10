@@ -4,23 +4,26 @@ import { render, fireEvent } from '@testing-library/react';
 import Buttons from '.';
 
 describe('Buttons component', () => {
+	let onClickMockFunction;
+	beforeEach(() => {
+		onClickMockFunction = jest.fn();
+	});
+
 	it('should call function onClickSelectPokemon onClick', () => {
-		const onClickSelectPokemon = jest.fn();
 		const { getByTestId } = render(
-			<Buttons onClickSelectPokemon={onClickSelectPokemon} />
+			<Buttons onClickSelectPokemon={onClickMockFunction} />
 		);
 		fireEvent.click(getByTestId('buttons-select-pokemon'));
 
-		expect(onClickSelectPokemon.mock.calls.length).toBe(1);
+		expect(onClickMockFunction.mock.calls.length).toBe(1);
 	});
 
 	it('should call function onClickBackToList onClick', () => {
-		const onClickBackToList = jest.fn();
 		const { getByTestId } = render(
-			<Buttons onClickBackToList={onClickBackToList} />
+			<Buttons onClickBackToList={onClickMockFunction} />
 		);
 		fireEvent.click(getByTestId('buttons-back-to-list'));
 
-		expect(onClickBackToList.mock.calls.length).toBe(1);
+		expect(onClickMockFunction.mock.calls.length).toBe(1);
 	});
 });
