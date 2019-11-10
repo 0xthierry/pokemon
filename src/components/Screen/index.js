@@ -20,7 +20,7 @@ export default function Screen({ listPokemon, selectedIndex }) {
 		setTimeout(() => {
 			setIsOn(!isOn);
 		}, 1000);
-		if (listPokemon.length) {
+		if (listPokemon.length > 1) {
 			scrollTo(selectedIndex);
 		}
 	}, [isOn, listPokemon.length, refs, selectedIndex]);
