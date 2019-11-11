@@ -31,7 +31,7 @@ export default function Home() {
 	}
 
 	async function handleOnSelectPokemon() {
-		const response = await api.get(`/pokemon/${selectedIndex + 1 + offSet}`);
+		const response = await api.get(`/pokemon/${pokemons[selectedIndex].name}`);
 		const { data } = response;
 		const { id, name, weight, height } = data;
 		setPokemon({ id, name, weight, height });
