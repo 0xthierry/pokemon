@@ -41,7 +41,12 @@ export default function Screen({
 				<ul>
 					{listPokemon.map(({ name }, i) => {
 						return (
-							<ListItem key={i} isSelected={i === selectedIndex} ref={refs[i]}>
+							<ListItem
+								key={i}
+								isSelected={i === selectedIndex}
+								ref={refs[i]}
+								data-testid={name}
+							>
 								{name}
 							</ListItem>
 						);
